@@ -27,6 +27,10 @@ var connected = false;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
+$(document).ready( function() {
+    onDeviceReady();
+});
+
 function onDeviceReady() {
     console.log("Device Ready");
     

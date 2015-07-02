@@ -4,7 +4,7 @@
  * 
  */
 //var serverURL = "http://students.engr.scu.edu/~mmaeshir/ikure/";
-var serverURL = "";
+var serverURL;
 var startTime;
 var stopTime;
 var updateFrequency = -1;
@@ -27,19 +27,21 @@ $(document).ready( function() {
   $("#submit").on("click",function(e) {
     assignDevice();
   });
+  onDeviceReady();
 });
 
 function onDeviceReady() {
     var first = window.localStorage.getItem("firstName");
     var last = window.localStorage.getItem("lastName");
-    if (first != null && last != null) {  //if device is already assigned to person, redirect to homescreen
+    serverURL = window.localStorage.getItem("serverURL");    
+
+    if (first != null && last != null && serverURL != null) {  //if device is already assigned to person, redirect to homescreen
         console.log("redirect to homescreen");
         window.location = "homescreen.html";
     }
     
-    serverURL = window.localStorage.getItem("serverURL");
     if (serverURL != null) {
-      document.getElementById("serverURL").value == serverURL;
+      document.getElementById("serverURL").value = serverURL;
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);   //initialize variables & tracking
 }
